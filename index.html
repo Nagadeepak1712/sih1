@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Student ERP System Alogorthemic Alchemist</title>
+<!-- Bootstrap 5 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<!-- Animate.css -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<!-- AOS Animate On Scroll -->
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<style>
+  /* Particles.js container */
+  #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    top: 0; left: 0;
+    background: linear-gradient(135deg, #ffffff 0%, #ffe100 100%);
+  }
+
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  /* Background and text colors */
+  background-color: #0d1b2a;   /* Dark navy blue */
+  color: #e0e1dd;             /* Soft white/grey text */
+
+  /* Smooth transition for theme */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+  /* Landing Page styles */
+  #landing-page {
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  #landing-logo {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+  }
+
+  #slogan {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    height: 2rem;
+  }
+
+  /* Typing effect */
+  .typing {
+    border-right: 3px solid #fff;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* Navbar styling */
+  nav.navbar {
+    background-color: rgba(255, 0, 0, 0.7);
+  }
+  nav.navbar .nav-link {
+    color: white;
+    transition: all 0.3s;
+    position: relative;
+  }
+  nav.navbar .nav-link:hover {
+    color: #ffdd57;
+  }
+  nav.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #ffdd57;
+    bottom: 0;
+    left: 0;
+    transition: width 0.3s;
+  }
+  nav.navbar .nav-link:hover::after {
+    width: 100%;
+  }
+/* Login & Registration */
+.form-control:focus {
+  border-color: #1900ff;
+  box-shadow: 0 0 8px #1900ff;
+  transition: 0.3s;
+}
+
+.btn-animated {
+  transition: box-shadow 0.4s ease-in-out, transform 0.3s;
+}
+
+.btn-animated:hover {
+  box-shadow: 0 0 15px #1900ff;
+  transform: scale(1.05);
+}
+
+
+  /* Step progress bar */
+  .step-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .step-progress .step {
+    width: 100%;
+    height: 6px;
+    background: #070000;
+    margin: 0 4px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .step-progress .step.active {
+    background: #764ba2;
+    animation: progressFill 1s forwards;
+  }
+  @keyframes progressFill {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  /* Dashboard styles */
+  #dashboard {
+    min-height: 100vh;
+    padding: 2rem;
+    background: #f9f9f9;
+  }
+  #dashboard .sidebar {
+    height: 100vh;
+    background: #333;
+    color: white;
+    padding: 1rem;
+    position: fixed;
+    width: 250px;
+    transition: transform 0.3s ease;
+  }
+  #dashboard .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+  #dashboard .sidebar .nav-link {
+    color: white;
+    margin-bottom: 1rem;
+  }
+  #dashboard .sidebar .nav-link:hover {
+    color: #764ba2;
+  }
+  #dashboard .content {
+    margin-left: 270px;
+    padding: 1rem;
+  }
+
+  /* Stats cards */
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Profile circular pic */
+  .profile-pic {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .profile-pic:hover {
+    transform: scale(1.1);
+  }
+
+  /* Tabs with transition */
+  .tab-content > .tab-pane {
+    transition: opacity 0.5s ease;
+    opacity: 0;
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  .tab-content > .active {
+    opacity: 1;
+    height: auto;
+  }
+
+  /* Course cards hover flip */
+  .course-card {
+    perspective: 1000px;
+  }
+  .course-inner {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  .course-card:hover .course-inner {
+    transform: rotateY(180deg);
+  }
+  .course-front, .course-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+  }
+  .course-front {
+    background: #764ba2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  .course-back {
+    background: #ffdd57;
+    color: #333;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  /* Progress bars for course completion */
+  .progress {
+    height: 15px;
+    border-radius: 10px;
+  }
+  .progress-bar {
+    transition: width 1.5s ease-in-out;
+    background: #764ba2;
+  }
+
+  /* Attendance calendar - simple style */
+  #attendance-calendar {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .calendar-day {
+    width: 40px;
+    height: 40px;
+    margin: 2px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+  }
+  .present {
+    background: #4CAF50;
+    color: white;
+  }
+  .absent {
+    background: #F44336;
+    color: white;
+  }
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+  }
+
+  /* Exam result cards */
+  .result-card {
+    background: white;
+    padding: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .number-counter {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #764ba2;
+  }
+
+  /* Fee cards */
+  .fee-card {
+    background: #fff3cd;
+    border-radius: 10px;
+    padding: 1.2rem;
+    box-shadow: 0 0 12px #ffdd57;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s ease;
+  }
+  .fee-card:hover {
+    box-shadow: 0 0 22px #764ba2;
+  }
+  .invoice-btn {
+    transition: transform 0.3s ease;
+  }
+  .invoice-btn:hover {
+    transform: scale(1.1);
+  }
+
+  /* Notices marquee */
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+    animation: marquee 15s linear infinite;
+    padding: 0.5rem 0;
+    background: #764ba2;
+    color: white;
+    font-weight: 600;
+  }
+  @keyframes marquee {
+    0% {transform: translateX(100%);}
+    100% {transform: translateX(-100%);}
+  }
+
+  /* Chatbox sliding */
+  #chatbox {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 300px;
+    max-height: 400px;
+    background: white;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    overflow: hidden;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  #chatbox.open {
+    transform: translateY(0);
+  }
+  #chat-header {
+    background: #764ba2;
+    color: white;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  #chat-messages {
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+  }
+  #chat-input {
+    border-top: 1px solid #ddd;
+    padding: 0.5rem;
+  }
+  #chat-input input {
+    width: 100%;
+    border: none;
+    padding: 0.5rem;
+    outline: none;
+  }
+  .notification-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #F44336;
+    color: white;
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 12px;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+
+  /* Library flip animation for books */
+  .book-card {
+    perspective: 1000px;
+    width: 150px;
+    height: 220px;
+    margin: 1rem;
+  }
+  .book-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  .book-card:hover .book-inner {
+    transform: rotateY(180deg);
+  }
+  .book-front, .book-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 12px;
+  }
+  .book-front {
+    background: #764ba2;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  .book-back {
+    background: #ffdd57;
+    color: #333;
+    transform: rotateY(180deg);
+    padding: 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Issue/return button */
+  .btn-issue, .btn-return {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  /* Dark mode */
+  body.dark-mode {
+    background: #121212;
+    color: #eee;
+  }
+  body.dark-mode nav.navbar {
+    background-color: rgba(30,30,30,0.9);
+  }
+  body.dark-mode #dashboard .sidebar {
+    background: #222;
+    color: #ddd;
+  }
+  body.dark-mode .stat-card, 
+  body.dark-mode .fee-card,
+  body.dark-mode .result-card {
+    background: #1e1e1e;
+    color: #ddd;
+    box-shadow: 0 0 15px rgba(100, 75, 162, 0.8);
+  }
+
+  /* Dark mode toggle */
+  .dark-mode-toggle {
+    cursor: pointer;
+    font-size: 1.4rem;
+  }
+
+  /* Modal animations */
+  .modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translateY(-100px);
+  }
+  .modal.show .modal-dialog {
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- Particles.js container -->
+<div id="particles-js"></div>
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand text-white animate__animated animate__fadeInDown" href="#">Institution Name</a>
+    <button class="navbar-toggler btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#landing-page">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#login-section">Login</a></li>
+        <li class="nav-item"><a class="nav-link" href="#dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="#notices">Notices</a></li>
+        <li class="nav-item"><a class="nav-link" href="#library">Library</a></li>
+        <li class="nav-item">
+          <span class="dark-mode-toggle nav-link" id="darkModeToggle" title="Toggle Dark/Light Mode">🌙</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Landing Page -->
+<section id="landing-page" class="d-flex flex-column justify-content-center align-items-center">
+  <div id="landing-logo" class="animate__animated animate__zoomIn">STUDENT ERP</div>
+  <div id="slogan" class="typing text-white" aria-label="Slogan"></div>
+</section>
+
+<!-- Login & Registration Section -->
+<section id="login-section" class="container py-5" data-aos="fade-up">
+  <h2 class="mb-4 text-center">Login & Registration</h2>
+  <ul class="nav nav-tabs justify-content-center mb-4" id="loginRegTabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="student-tab" data-bs-toggle="tab" data-bs-target="#student-login" type="button" role="tab" aria-controls="student-login" aria-selected="true">Student Login</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="teacher-tab" data-bs-toggle="tab" data-bs-target="#teacher-login" type="button" role="tab" aria-controls="teacher-login" aria-selected="false">Teacher Login</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="admin-tab" data-bs-toggle="tab" data-bs-target="#admin-login" type="button" role="tab" aria-controls="admin-login" aria-selected="false">Admin Login</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab" aria-controls="register" aria-selected="false">Register</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="loginRegTabsContent">
+    <!-- Student Login -->
+    <div class="tab-pane fade show active" id="student-login" role="tabpanel" aria-labelledby="student-tab">
+      <form class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3 position-relative">
+          <label for="studentEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="studentEmail" placeholder="student@example.com" required />
+        </div>
+        <div class="mb-3 position-relative">
+          <label for="studentPassword" class="form-label">Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="studentPassword" required />
+            <button type="button" class="btn btn-outline-secondary" id="toggleStudentPass" aria-label="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-animated btn-primary w-100">Login</button>
+      </form>
+    </div>
+    <!-- Teacher Login -->
+    <div class="tab-pane fade" id="teacher-login" role="tabpanel" aria-labelledby="teacher-tab">
+      <form class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+          <label for="teacherEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="teacherEmail" placeholder="teacher@example.com" required />
+        </div>
+        <div class="mb-3">
+          <label for="teacherPassword" class="form-label">Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="teacherPassword" required />
+            <button type="button" class="btn btn-outline-secondary" id="toggleTeacherPass" aria-label="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-animated btn-primary w-100">Login</button>
+      </form>
+    </div>
+    <!-- Admin Login -->
+    <div class="tab-pane fade" id="admin-login" role="tabpanel" aria-labelledby="admin-tab">
+      <form class="mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+          <label for="adminEmail" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="adminEmail" placeholder="admin@example.com" required />
+        </div>
+        <div class="mb-3">
+          <label for="adminPassword" class="form-label">Password</label>
+          <div class="input-group">
+            <input type="password" class="form-control" id="adminPassword" required />
+            <button type="button" class="btn btn-outline-secondary" id="toggleAdminPass" aria-label="Toggle password visibility">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-animated btn-primary w-100">Login</button>
+      </form>
+    </div>
+    <!-- Registration Form with step-by-step progress -->
+    <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+      <form id="registerForm" class="mx-auto" style="max-width: 400px;">
+        <div class="step-progress mb-3">
+          <div class="step active" id="step-1-bar"></div>
+          <div class="step" id="step-2-bar"></div>
+          <div class="step" id="step-3-bar"></div>
+        </div>
+        <!-- Step 1 -->
+        <div class="register-step" id="step-1">
+          <div class="mb-3">
+            <label for="regName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="regName" required />
+          </div>
+          <div class="mb-3">
+            <label for="regEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" required />
+          </div>
+          <button type="button" class="btn btn-animated btn-primary w-100" id="toStep2">Next</button>
+        </div>
+        <!-- Step 2 -->
+        <div class="register-step d-none" id="step-2">
+          <div class="mb-3">
+            <label for="regRole" class="form-label">Role</label>
+            <select class="form-select" id="regRole" required>
+              <option value="" selected disabled>Select role</option>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-secondary w-50" id="toStep1">Back</button>
+          <button type="button" class="btn btn-animated btn-primary w-50" id="toStep3">Next</button>
+        </div>
+        <!-- Step 3 -->
+        <div class="register-step d-none" id="step-3">
+          <div class="mb-3">
+            <label for="regPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="regPassword" required />
+          </div>
+          <button type="button" class="btn btn-secondary w-50" id="toStep2Back">Back</button>
+          <button type="submit" class="btn btn-animated btn-success w-50">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboard Section -->
+<section id="dashboard" class="d-flex" data-aos="fade-left">
+  <aside class="sidebar">
+    <button id="sidebarToggle" class="btn btn-outline-light mb-3 w-100">Toggle Menu</button>
+    <nav class="nav flex-column">
+      <a href="#" class="nav-link">Welcome</a>
+      <a href="#" class="nav-link">Student Profile</a>
+      <a href="#" class="nav-link">Courses & Subjects</a>
+      <a href="#" class="nav-link">Attendance Management</a>
+      <a href="#" class="nav-link">Exams & Results</a>
+      <a href="#" class="nav-link">Fee Management</a>
+      <a href="#" class="nav-link">Notices</a>
+      <a href="#" class="nav-link">Messaging</a>
+      <a href="#" class="nav-link">Library Management</a>
+      <a href="#" class="nav-link">Settings</a>
+      <a href="#" class="nav-link text-danger">Logout</a>
+    </nav>
+  </aside>
+  <main class="content">
+    <h3 class="animate__animated animate__fadeIn">Welcome, Student Name</h3>
+    <div class="row g-4 my-4">
+      <div class="col-md-3" data-aos="zoom-in">
+        <div class="stat-card text-center p-4">
+          <h5>Students</h5>
+          <div class="display-4" id="statStudents">1200</div>
+        </div>
+      </div>
+      <div class="col-md-3" data-aos="zoom-in" data-aos-delay="100">
+        <div class="stat-card text-center p-4">
+          <h5>Courses</h5>
+          <div class="display-4" id="statCourses">35</div>
+        </div>
+      </div>
+      <div class="col-md-3" data-aos="zoom-in" data-aos-delay="200">
+        <div class="stat-card text-center p-4">
+          <h5>Attendance%</h5>
+          <div class="display-4" id="statAttendance">92%</div>
+        </div>
+      </div>
+      <div class="col-md-3" data-aos="zoom-in" data-aos-delay="300">
+        <div class="stat-card text-center p-4">
+          <h5>Fees Paid</h5>
+          <div class="display-4" id="statFees">₹ 2,50,000</div>
+        </div>
+      </div>
+    </div>
+    <!-- Chart.js placeholders -->
+    <canvas id="marksChart" height="150" style="max-width:600px;"></canvas>
+    <canvas id="attendanceChart" height="150" style="max-width:600px; margin-top:2rem;"></canvas>
+  </main>
+</section>
+
+<!-- Student Profile Section -->
+<section id="student-profile" class="container py-5" data-aos="fade-up">
+  <h2>Student Profile</h2>
+  <div class="d-flex align-items-center mb-4">
+    <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-pic" id="profilePic" />
+    <button class="btn btn-outline-primary ms-3" id="editProfileBtn">Edit Profile</button>
+  </div>
+  <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+    <li class="nav-item" role="presentation"><button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-info" type="button" role="tab">Personal Info</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" id="academic-tab" data-bs-toggle="tab" data-bs-target="#academic-info" type="button" role="tab">Academic Info</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance-record" type="button" role="tab">Attendance Record</button></li>
+    <li class="nav-item" role="presentation"><button class="nav-link" id="fee-tab" data-bs-toggle="tab" data-bs-target="#fee-status" type="button" role="tab">Fee Status</button></li>
+  </ul>
+  <div class="tab-content p-4 border border-top-0 rounded-bottom" id="profileTabsContent">
+    <div class="tab-pane fade show active" id="personal-info" role="tabpanel">
+      <p>Name: John Doe</p>
+      <p>Email: john.doe@example.com</p>
+      <p>Phone: +91 9876543210</p>
+    </div>
+    <div class="tab-pane fade" id="academic-info" role="tabpanel">
+      <p>Course: Computer Science</p>
+      <p>Year: 2nd Year</p>
+      <p>Roll Number: CS2025-001</p>
+    </div>
+    <div class="tab-pane fade" id="attendance-record" role="tabpanel">
+      <p>Attendance: 92%</p>
+      <p>Days Present: 185</p>
+      <p>Days Absent: 16</p>
+    </div>
+    <div class="tab-pane fade" id="fee-status" role="tabpanel">
+      <p>Fee Paid: ₹ 2,50,000</p>
+      <p>Fee Due: ₹ 0</p>
+    </div>
+  </div>
+</section>
+
+<!-- Course & Subjects Section -->
+<section id="courses-subjects" class="container py-5" data-aos="fade-up">
+  <h2>Courses & Subjects</h2>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="course-card">
+        <div class="course-inner">
+          <div class="course-front d-flex align-items-center justify-content-center">Computer Science</div>
+          <div class="course-back d-flex flex-column align-items-center justify-content-center">
+            <div>Completion</div>
+            <div class="progress w-75 mt-2">
+              <div class="progress-bar" style="width: 75%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="course-card">
+        <div class="course-inner">
+          <div class="course-front d-flex align-items-center justify-content-center">Mathematics</div>
+          <div class="course-back d-flex flex-column align-items-center justify-content-center">
+            <div>Completion</div>
+            <div class="progress w-75 mt-2">
+              <div class="progress-bar" style="width: 90%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="course-card">
+        <div class="course-inner">
+          <div class="course-front d-flex align-items-center justify-content-center">Physics</div>
+          <div class="course-back d-flex flex-column align-items-center justify-content-center">
+            <div>Completion</div>
+            <div class="progress w-75 mt-2">
+              <div class="progress-bar" style="width: 60%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Attendance Management -->
+<section id="attendance-management" class="container py-5" data-aos="fade-up">
+  <h2>Attendance Management</h2>
+  <div id="attendance-calendar" class="calendar-grid"></div>
+  <canvas id="attendancePercentChart" height="150" style="max-width: 700px; margin-top: 2rem;"></canvas>
+</section>
+
+<!-- Exams & Results -->
+<section id="exams-results" class="container py-5" data-aos="fade-up">
+  <h2>Exams & Results</h2>
+  <div>
+    <h5>Upcoming Exam Timetable</h5>
+    <ul class="list-group mb-4 animate__animated animate__fadeIn">
+      <li class="list-group-item">Maths - 10th Sept 2025, 10:00 AM</li>
+      <li class="list-group-item">Physics - 12th Sept 2025, 12:00 PM</li>
+      <li class="list-group-item">Chemistry - 15th Sept 2025, 9:00 AM</li>
+    </ul>
+  </div>
+  <div class="result-card">
+    <h5>Latest Results</h5>
+    <div class="number-counter" id="resultMaths">0</div>
+    <div>Maths Marks</div>
+  </div>
+  <div class="result-card">
+    <div class="number-counter" id="resultPhysics">0</div>
+    <div>Physics Marks</div>
+  </div>
+  <div class="result-card">
+    <div class="number-counter" id="resultChemistry">0</div>
+    <div>Chemistry Marks</div>
+  </div>
+  <canvas id="marksBarChart" height="150" style="max-width: 700px; margin-top: 2rem;"></canvas>
+</section>
+
+<!-- Fee Management -->
+<section id="fee-management" class="container py-5" data-aos="fade-up">
+  <h2>Fee Management</h2>
+  <div class="fee-card">
+    <h5>Fee Status</h5>
+    <p>Paid: ₹ 2,50,000</p>
+    <p>Due: ₹ 0</p>
+  </div>
+  <button class="btn btn-primary mb-3" id="payNowBtn">Pay Online</button>
+  <button class="btn btn-outline-secondary invoice-btn">Download Invoice</button>
+</section>
+
+<!-- Notices & Announcements -->
+<section id="notices" class="container py-3" data-aos="fade-up">
+  <div class="marquee" aria-live="polite" aria-atomic="true">
+    Urgent: Semester exams start from 10th September | New library books available now | Maintenance on 8th Sep from 10 PM - 2 AM
+  </div>
+</section>
+
+<!-- Messaging & Communication -->
+<div id="chatbox" aria-live="polite" aria-atomic="true" role="region" aria-label="Messaging Chatbox">
+  <div id="chat-header">Chat <span class="notification-badge" id="chatNotification" style="display:none;">1</span></div>
+  <div id="chat-messages"></div>
+  <div id="chat-input">
+    <input type="text" placeholder="Type a message..." aria-label="Chat message input" />
+  </div>
+</div>
+
+<!-- Library Management -->
+<section id="library" class="container py-5" data-aos="fade-up">
+  <h2>Library Management</h2>
+  <input type="search" id="bookSearch" class="form-control mb-4" placeholder="Search books..." aria-label="Search books" />
+  <div class="d-flex flex-wrap justify-content-center" id="bookCatalog">
+    <div class="book-card">
+      <div class="book-inner">
+        <div class="book-front">Clean Code</div>
+        <div class="book-back">
+          Author: Robert C. Martin<br/>Issue Date: N/A
+          <button class="btn btn-success btn-issue mt-2">Issue</button>
+          <button class="btn btn-danger btn-return mt-1">Return</button>
+        </div>
+      </div>
+    </div>
+    <div class="book-card">
+      <div class="book-inner">
+        <div class="book-front">JavaScript: The Good Parts</div>
+        <div class="book-back">
+          Author: Douglas Crockford<br/>Issue Date: 05 Sep 2025
+          <button class="btn btn-success btn-issue mt-2">Issue</button>
+          <button class="btn btn-danger btn-return mt-1">Return</button>
+        </div>
+      </div>
+    </div>
+    <!-- Add more books as needed -->
+  </div>
+</section>
+
+<!-- Settings & Logout -->
+<section id="settings" class="container py-5" data-aos="fade-up">
+  <h2>Settings</h2>
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="darkModeSwitch" aria-label="Toggle dark mode" />
+    <label class="form-check-label" for="darkModeSwitch">Dark Mode</label>
+  </div>
+  <button class="btn btn-danger mt-3" id="logoutBtn">Logout</button>
+</section>
+
+<!-- Bootstrap Bundle with Popper JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- AOS -->
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<!-- Particles.js -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+<script>
+  // Initialize AOS
+  AOS.init();
+
+  // Typing effect on landing page slogan
+  const sloganText = "Empowering Education Through Technology";
+  let sloganIndex = 0;
+  const sloganElement = document.getElementById('slogan');
+
+  function typeSlogan() {
+    if (sloganIndex < sloganText.length) {
+      sloganElement.textContent += sloganText.charAt(sloganIndex);
+      sloganIndex++;
+      setTimeout(typeSlogan, 100);
+    } else {
+      sloganElement.classList.remove('typing');
+    }
+  }
+  typeSlogan();
+
+  // Particles.js config
+  particlesJS('particles-js', {
+    "particles": {
+      "number": {"value": 70, "density": {"enable": true, "value_area": 800}},
+      "color": {"value": "#ffffff"},
+      "shape": {"type": "circle"},
+      "opacity": {"value": 0.5, "random": false},
+      "size": {"value": 3, "random": true},
+      "line_linked": {
+        "enable": true,
+        "distance": 120,
+        "color": "#ffffff",
+        "opacity": 0.3,
+        "width": 1
+      },
+      "move": {
+        "enable": true,
+        "speed": 3,
+        "direction": "none",
+        "random": false,
+        "straight": false,
+        "out_mode": "out"
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {"enable": true, "mode": "grab"},
+        "onclick": {"enable": true, "mode": "push"}
+      },
+      "modes": {
+        "grab": {"distance": 140, "line_linked": {"opacity": 0.5}},
+        "push": {"particles_nb": 4}
+      }
+    },
+    "retina_detect": true
+  });
+
+  // Toggle password visibility for login forms
+  document.querySelectorAll("[id^=toggle]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const input = btn.previousElementSibling;
+      if (input.type === "password") {
+        input.type = "text";
+        btn.textContent = "🙈";
+      } else {
+        input.type = "password";
+        btn.textContent = "👁️";
+      }
+    });
+  });
+
+  // Registration form step transitions
+  const step1 = document.getElementById('step-1');
+  const step2 = document.getElementById('step-2');
+  const step3 = document.getElementById('step-3');
+  const step1Bar = document.getElementById('step-1-bar');
+  const step2Bar = document.getElementById('step-2-bar');
+  const step3Bar = document.getElementById('step-3-bar');
+
+  document.getElementById('toStep2').addEventListener('click', () => {
+    step1.classList.add('d-none');
+    step2.classList.remove('d-none');
+    step1Bar.classList.remove('active');
+    step2Bar.classList.add('active');
+  });
+  document.getElementById('toStep1').addEventListener('click', () => {
+    step2.classList.add('d-none');
+    step1.classList.remove('d-none');
+    step2Bar.classList.remove('active');
+    step1Bar.classList.add('active');
+  });
+  document.getElementById('toStep3').addEventListener('click', () => {
+    step2.classList.add('d-none');
+    step3.classList.remove('d-none');
+    step2Bar.classList.remove('active');
+    step3Bar.classList.add('active');
+  });
+  document.getElementById('toStep2Back').addEventListener('click', () => {
+    step3.classList.add('d-none');
+    step2.classList.remove('d-none');
+    step3Bar.classList.remove('active');
+    step2Bar.classList.add('active');
+  });
+
+  // Sidebar toggle
+  const sidebar = document.querySelector('#dashboard .sidebar');
+  document.getElementById('sidebarToggle').addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+
+  // Animate statistics numbers on load
+  function animateNumber(elementId, target, duration=1500) {
+    const el = document.getElementById(elementId);
+    let start = 0;
+    const stepTime = Math.abs(Math.floor(duration / target));
+    const timer = setInterval(() => {
+      start += 1;
+      if (start >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      } else {
+        el.textContent = start;
+      }
+    }, stepTime);
+  }
+
+  animateNumber("statStudents", 1200);
+  animateNumber("statCourses", 35);
+  animateNumber("statAttendance", 92);
+  animateNumber("statFees", 250000);
+
+  // Charts for dashboard (Marks and Attendance)
+  const marksCtx = document.getElementById('marksChart').getContext('2d');
+  const marksChart = new Chart(marksCtx, {
+    type: 'line',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+      datasets: [{
+        label: 'Marks',
+        data: [85, 88, 90, 92, 91, 95, 94],
+        fill: false,
+        borderColor: '#764ba2',
+        tension: 0.3
+      }]
+    },
+    options: {
+      animation: {duration: 1500},
+      responsive: true,
+      plugins: {legend: {display: true}}
+    }
+  });
+
+  const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+  const attendanceChart = new Chart(attendanceCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul'],
+      datasets: [{
+        label: 'Attendance %',
+        data: [91, 92, 90, 93, 94, 95, 92],
+        backgroundColor: '#764ba2',
+      }]
+    },
+    options: {
+      animation: {duration: 1500},
+      responsive: true,
+      plugins: {legend: {display: false}},
+      scales: {
+        y: {min: 0, max: 100}
+      }
+    }
+  });
+
+  // Attendance Management Calendar
+  const attendanceCalendar = document.getElementById('attendance-calendar');
+  // Example data: For current month (Sept 2025), mark random present/absent days
+  const totalDays = 30;
+  function createCalendar() {
+    attendanceCalendar.innerHTML = "";
+    for (let day=1; day<=totalDays; day++) {
+      const dayDiv = document.createElement("div");
+      dayDiv.classList.add("calendar-day");
+      dayDiv.textContent = day;
+
+      // Randomly assign presence or absence for demo purpose
+      if (Math.random() > 0.2) {
+        dayDiv.classList.add("present");
+      } else {
+        dayDiv.classList.add("absent");
+      }
+      attendanceCalendar.appendChild(dayDiv);
+    }
+  }
+  createCalendar();
+
+  // Attendance percentage chart (Pie)
+  const attendancePercentCtx = document.getElementById('attendancePercentChart').getContext('2d');
+  const attendancePercentChart = new Chart(attendancePercentCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Present', 'Absent'],
+      datasets: [{
+        label: 'Attendance',
+        data: [92, 8],
+        backgroundColor: ['#4CAF50', '#F44336'],
+        hoverOffset: 20
+      }]
+    },
+    options: {
+      animation: {duration: 1200},
+      responsive: true
+    }
+  });
+
+  // Exam Results counters and Bar chart
+  function animateResultCounter(id, target) {
+    let count = 0;
+    const el = document.getElementById(id);
+    const interval = setInterval(() => {
+      count++;
+      el.textContent = count;
+      if (count >= target) clearInterval(interval);
+    }, 30);
+  }
+  animateResultCounter('resultMaths', 88);
+  animateResultCounter('resultPhysics', 90);
+  animateResultCounter('resultChemistry', 84);
+
+  const marksBarCtx = document.getElementById('marksBarChart').getContext('2d');
+  const marksBarChart = new Chart(marksBarCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Maths', 'Physics', 'Chemistry'],
+      datasets: [{
+        label: 'Marks',
+        data: [88, 90, 84],
+        backgroundColor: ['#764ba2', '#9262d9', '#af8eed']
+      }]
+    },
+    options: {
+      animation: {duration: 1000},
+      responsive: true,
+      plugins: {legend: {display: false}},
+      scales: {y: {min: 0, max: 100}}
+    }
+  });
+
+  // Pay Online button - placeholder alert
+  document.getElementById('payNowBtn').addEventListener('click', () => {
+    alert('Redirecting to online payment gateway...');
+  });
+
+  // Invoice download button - placeholder action
+  document.querySelector('.invoice-btn').addEventListener('click', () => {
+    alert('Invoice downloaded!');
+  });
+
+  // Chatbox toggle and notification badge
+  const chatbox = document.getElementById('chatbox');
+  const chatHeader = document.getElementById('chat-header');
+  const chatNotification = document.getElementById('chatNotification');
+  chatHeader.addEventListener('click', () => {
+    chatbox.classList.toggle('open');
+    if (chatbox.classList.contains('open')) {
+      chatNotification.style.display = 'none';
+    }
+  });
+  // Simulate new message notification after 5 seconds
+  setTimeout(() => {
+    if (!chatbox.classList.contains('open')) {
+      chatNotification.style.display = 'inline-block';
+    }
+  }, 5000);
+
+  // Library book search filtering
+  document.getElementById('bookSearch').addEventListener('input', (e) => {
+    const search = e.target.value.toLowerCase();
+    const books = document.querySelectorAll('#bookCatalog .book-card');
+    books.forEach(book => {
+      const frontText = book.querySelector('.book-front').textContent.toLowerCase();
+      if (frontText.includes(search)) {
+        book.style.display = 'inline-block';
+      } else {
+        book.style.display = 'none';
+      }
+    });
+  });
+
+  // Dark/Light Mode toggle
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const darkModeSwitch = document.getElementById('darkModeSwitch');
+  function enableDarkMode(enable) {
+    if (enable) {
+      document.body.classList.add('dark-mode');
+      darkModeToggle.textContent = '☀️';
+      darkModeSwitch.checked = true;
+    } else {
+      document.body.classList.remove('dark-mode');
+      darkModeToggle.textContent = '🌙';
+      darkModeSwitch.checked = false;
+    }
+  }
+  darkModeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    enableDarkMode(!isDark);
+  });
+  darkModeSwitch.addEventListener('change', (e) => {
+    enableDarkMode(e.target.checked);
+  });
+  // Default theme
+  enableDarkMode(false);
+
+  // Logout button animation & alert
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    const btn = document.getElementById('logoutBtn');
+    btn.disabled = true;
+    btn.textContent = 'Logging out...';
+    btn.classList.add('btn-animated');
+    setTimeout(() => {
+      alert('Logged out successfully!');
+      btn.disabled = false;
+      btn.textContent = 'Logout';
+      btn.classList.remove('btn-animated');
+    }, 1500);
+  });
+
+  // Profile Edit modal using Bootstrap modal (created dynamically for demonstration)
+  document.getElementById('editProfileBtn').addEventListener('click', () => {
+    const modalHTML = `
+      <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content animate__animated animate__fadeInDown">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="profileEditForm">
+                <div class="mb-3">
+                  <label for="editName" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="editName" value="John Doe" required>
+                </div>
+                <div class="mb-3">
+                  <label for="editEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="editEmail" value="john.doe@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label for="editPhone" class="form-label">Phone</label>
+                  <input type="text" class="form-control" id="editPhone" value="+91 9876543210" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    const editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+    editProfileModal.show();
+
+    document.getElementById('profileEditForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Simulate save and update UI
+      const newName = document.getElementById('editName').value;
+      const newEmail = document.getElementById('editEmail').value;
+      // Update personal info tab content
+      const personalInfo = document.getElementById('personal-info');
+      personalInfo.innerHTML = `<p>Name: ${newName}</p><p>Email: ${newEmail}</p><p>Phone: ${document.getElementById('editPhone').value}</p>`;
+      editProfileModal.hide();
+      setTimeout(() => {
+        document.getElementById('editProfileModal').remove();
+      }, 500);
+    });
+
+    // Cleanup modal on close
+    document.getElementById('editProfileModal').addEventListener('hidden.bs.modal', () => {
+      document.getElementById('editProfileModal').remove();
+    });
+  });
+</script>
+
+</body>
+</html>
